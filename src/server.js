@@ -2,6 +2,9 @@ const http = require('http');
 
 const CONFIG = require('./config');
 const app = require('./app');
+const { db } = require('./middlewares');
+
+db.connect();
 
 http
   .createServer(app)
