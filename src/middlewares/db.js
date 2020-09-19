@@ -10,6 +10,7 @@ const db = {
           useUnifiedTopology: true,
           useNewUrlParser: true,
           useCreateIndex: true,
+          useFindAndModify: false,
           dbName: DB_NAME
         },
         error => {
