@@ -2,7 +2,7 @@ const HTTP_CODE = require('http-status-codes');
 
 const { Variant } = require('../models');
 
-const getVariants = async (req, res) => {
+const getVariants = async (_, res) => {
   try {
     const variants = await Variant.find();
     if (variants.length < 1) return res.sendStatus(HTTP_CODE.NOT_FOUND);
