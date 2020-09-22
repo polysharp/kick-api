@@ -7,9 +7,7 @@ const deleteSerie = async (req, res) => {
   try {
     if (!mongoose.Types.ObjectId.isValid(req.params.id)) return res.sendStatus(HTTP_CODE.NOT_FOUND);
 
-    const serieExists = await Serie.findOne({
-      _id: req.params.id
-    });
+    const serieExists = await Serie.findById(req.params.id);
     if (!serieExists) return res.sendStatus(HTTP_CODE.NOT_FOUND);
 
     return Serie.deleteOne({ _id: req.params.id }, (err, result) => {

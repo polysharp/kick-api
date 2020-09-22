@@ -4,13 +4,12 @@ const { Serie } = require('../models');
 
 const getSerie = async (req, res) => {
   try {
-    const serie = await Serie.findOne({
-      _id: req.params.id
-    });
+    const serie = await Serie.findById(req.params.id);
 
     if (!serie)
       return res.set(HTTP_CODE.NOT_FOUND).json({
-        message: 'Serie not found'
+        status: HTTP_CODE.NOT_FOUND,
+        msg: 'Serie not found'
       });
 
     return res.set(HTTP_CODE.OK).json(serie);

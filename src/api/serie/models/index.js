@@ -3,22 +3,9 @@ const joigoose = require('joigoose')(mongoose);
 const joi = require('@hapi/joi');
 
 const serieJoiSchema = joi.object({
-  belongId: joi.string().required(),
+  brandId: joi.string().required(),
   name: joi
     .string()
-    .alphanum()
-    .min(1)
-    .required(),
-  release: joi
-    .string()
-    .min(1)
-    .required()
-});
-
-const serieUpdateJoiSchema = joi.object({
-  name: joi
-    .string()
-    .alphanum()
     .min(1)
     .required(),
   release: joi
@@ -34,6 +21,5 @@ const Serie = mongoose.model('Serie', serieSchema);
 
 module.exports = {
   serieJoiSchema,
-  serieUpdateJoiSchema,
   Serie
 };

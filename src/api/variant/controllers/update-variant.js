@@ -1,28 +1,27 @@
 const HTTP_CODE = require('http-status-codes');
 
-const { Variant, variantUpdateJoiSchema } = require('../models');
+const { Variant, variantJoiSchema } = require('../models');
 
 const updateVariant = async (req, res) => {
   try {
-    const { error } = variantUpdateJoiSchema.validate(req.body, { abortEarly: false });
+    const { error } = variantJoiSchema.validate(req.body, { abortEarly: false });
     if (error)
       return res.set(HTTP_CODE.BAD_REQUEST).json({
+        status: HTTP_CODE.BAD_REQUEST,
+        msg: error.details.map(detail => detail.message),
         error
       });
 
-    const variantExists = await Variant.findOne({
-      _id: req.params.id
-    });
+    const variantExists = await Variant.findById(req.params.id);
     if (!variantExists) return res.sendStatus(HTTP_CODE.NOT_FOUND);
 
     await Variant.findByIdAndUpdate(req.params.id, {
+      productId: req.body.productId,
       name: req.body.name,
       price: req.body.price
     });
 
-    const updatedVariant = await Variant.findOne({
-      _id: req.params.id
-    });
+    const updatedVariant = await Variant.findById(req.params.id);
 
     return res.set(HTTP_CODE.OK).json(updatedVariant);
   } catch (err) {

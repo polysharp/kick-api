@@ -7,20 +7,24 @@ const createVariant = async (req, res) => {
     const { error } = variantJoiSchema.validate(req.body, { abortEarly: false });
     if (error)
       return res.set(HTTP_CODE.BAD_REQUEST).json({
+        status: HTTP_CODE.BAD_REQUEST,
+        msg: error.details.map(detail => detail.message),
         error
       });
 
-    const variantExists = await Variant.findOne({
-      belongId: req.body.belongId
-    });
-
+    const variantExists = await Variant.find({ productId: req.body.productId });
     if (variantExists)
-      return res.set(HTTP_CODE.BAD_REQUEST).json({
-        message: 'Variant for this product already exists.'
+      variantExists.forEach(variant => {
+        if (variant.name === req.body.name)
+          return res.status(HTTP_CODE.CONFLICT).json({
+            status: HTTP_CODE.CONFLICT,
+            msg: `Variant with name (${req.body.name}) for Product with id (${req.body.brandId}) already exists.`
+          });
+        return null;
       });
 
     const variant = new Variant({
-      belongId: req.body.belongId,
+      productId: req.body.productId,
       name: req.body.name,
       price: req.body.price
     });

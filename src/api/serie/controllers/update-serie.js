@@ -1,21 +1,22 @@
 const HTTP_CODE = require('http-status-codes');
 
-const { Serie, serieUpdateJoiSchema } = require('../models');
+const { Serie, serieJoiSchema } = require('../models');
 
 const updateSerie = async (req, res) => {
   try {
-    const { error } = serieUpdateJoiSchema.validate(req.body, { abortEarly: false });
+    const { error } = serieJoiSchema.validate(req.body, { abortEarly: false });
     if (error)
       return res.set(HTTP_CODE.BAD_REQUEST).json({
+        status: HTTP_CODE.BAD_REQUEST,
+        msg: error.details.map(detail => detail.message),
         error
       });
 
-    const serieExists = await Serie.findOne({
-      _id: req.params.id
-    });
+    const serieExists = await Serie.findById(req.params.id);
     if (!serieExists) return res.sendStatus(HTTP_CODE.NOT_FOUND);
 
     await Serie.findByIdAndUpdate(req.params.id, {
+      brandId: req.body.brandId,
       name: req.body.name,
       release: req.body.release
     });

@@ -4,13 +4,11 @@ const { Variant } = require('../models');
 
 const getVariant = async (req, res) => {
   try {
-    const variant = await Variant.findOne({
-      _id: req.params.id
-    });
-
+    const variant = await Variant.findById(req.params.id);
     if (!variant)
       return res.set(HTTP_CODE.NOT_FOUND).json({
-        message: 'Variant not found'
+        status: HTTP_CODE.NOT_FOUND,
+        msg: 'Variant not found'
       });
 
     return res.set(HTTP_CODE.OK).json(variant);
