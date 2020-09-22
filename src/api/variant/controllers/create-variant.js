@@ -18,7 +18,7 @@ const createVariant = async (req, res) => {
         if (variant.name === req.body.name)
           return res.status(HTTP_CODE.CONFLICT).json({
             status: HTTP_CODE.CONFLICT,
-            msg: `Variant with name (${req.body.name}) for Product with id (${req.body.brandId}) already exists.`
+            msg: `Variant with name (${req.body.name}) for Product with id (${req.body.productId}) already exists.`
           });
         return null;
       });
