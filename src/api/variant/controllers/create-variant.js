@@ -12,28 +12,32 @@ const createVariant = async (req, res) => {
         error
       });
 
-    const variantExists = await Variant.find({ productId: req.body.productId });
-    if (variantExists)
-      variantExists.forEach(variant => {
-        if (variant.name === req.body.name)
-          return res.status(HTTP_CODE.CONFLICT).json({
-            status: HTTP_CODE.CONFLICT,
-            msg: `Variant with name (${req.body.name}) for Product with id (${req.body.productId}) already exists.`
-          });
-        return null;
-      });
-
     const variant = new Variant({
       productId: req.body.productId,
-      name: req.body.name,
-      price: req.body.price
+      ref: req.body.ref,
+      color: req.body.color,
+      price: req.body.price,
+      quantity: req.body.quantity
     });
 
-    variant.save();
+    variant.save(err => {
+      if (err)
+        if (Object.keys(err.keyValue)[0] === 'ref')
+          return res.status(HTTP_CODE.CONFLICT).json({
+            status: HTTP_CODE.CONFLICT,
+            msg: `Variant with ref (${req.body.ref}) for Product with id (${req.body.productId}) already exists.`
+          });
+        else
+          return res.status(HTTP_CODE.CONFLICT).json({
+            status: HTTP_CODE.CONFLICT,
+            msg: `Variant with color (${req.body.color.code}) for Product with id (${req.body.productId}) already exists.`
+          });
+      return res.set(HTTP_CODE.OK).json(variant);
+    });
 
-    return res.set(HTTP_CODE.OK).json(variant);
+    return null;
   } catch (err) {
-    return res.set(HTTP_CODE.INTERNAL_SERVER_ERROR);
+    return res.sendStatus(HTTP_CODE.INTERNAL_SERVER_ERROR);
   }
 };
 

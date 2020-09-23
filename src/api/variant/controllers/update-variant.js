@@ -17,8 +17,10 @@ const updateVariant = async (req, res) => {
 
     await Variant.findByIdAndUpdate(req.params.id, {
       productId: req.body.productId,
-      name: req.body.name,
-      price: req.body.price
+      ref: req.body.ref,
+      color: req.body.color,
+      price: req.body.price,
+      quantity: req.body.quantity
     });
 
     const updatedVariant = await Variant.findById(req.params.id);

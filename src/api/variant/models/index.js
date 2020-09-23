@@ -4,20 +4,39 @@ const joi = require('@hapi/joi');
 
 const variantJoiSchema = joi.object({
   productId: joi.string().required(),
-  name: joi
-    .string()
-    .min(1)
+  ref: joi.string(),
+  color: joi
+    .object({
+      label: joi
+        .string()
+        .min(1)
+        .required(),
+      code: joi
+        .string()
+        .regex(/^#[a-fA-F0-9]{6}$/)
+        .required()
+    })
     .required(),
   price: joi
     .number()
     .integer()
     .min(1)
+    .required(),
+  quantity: joi
+    .number()
+    .min(0)
     .required()
 });
 
-const variantSchema = new mongoose.Schema(joigoose.convert(variantJoiSchema), {
+const joigooseSchema = joigoose.convert(variantJoiSchema);
+
+joigooseSchema.ref.unique = true;
+joigooseSchema.color.code.unique = true;
+
+const variantSchema = new mongoose.Schema(joigooseSchema, {
   timestamps: true
 });
+
 const Variant = mongoose.model('Variant', variantSchema);
 
 module.exports = {
