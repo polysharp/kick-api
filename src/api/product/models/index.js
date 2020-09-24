@@ -3,6 +3,7 @@ const joigoose = require('joigoose')(mongoose);
 const joi = require('@hapi/joi');
 
 const productJoiSchema = joi.object({
+  ref: joi.string().required(),
   name: joi
     .string()
     .min(1)
@@ -31,7 +32,11 @@ const productJoiSchema = joi.object({
     .required()
 });
 
-const productSchema = new mongoose.Schema(joigoose.convert(productJoiSchema), {
+const joigooseSchema = joigoose.convert(productJoiSchema);
+
+joigooseSchema.ref.unique = true;
+
+const productSchema = new mongoose.Schema(joigooseSchema, {
   timestamps: true
 });
 const Product = mongoose.model('Product', productSchema);
