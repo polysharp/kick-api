@@ -21,9 +21,7 @@ const updateSerie = async (req, res) => {
       release: req.body.release
     });
 
-    const updatedSerie = await Serie.findOne({
-      _id: req.params.id
-    });
+    const updatedSerie = await Serie.findById(req.params.id);
 
     return res.set(HTTP_CODE.OK).json(updatedSerie);
   } catch (err) {

@@ -20,9 +20,7 @@ const updateBrand = async (req, res) => {
       release: req.body.release
     });
 
-    const updatedBrand = await Brand.findOne({
-      _id: req.params.id
-    });
+    const updatedBrand = await Brand.findById(req.params.id);
 
     return res.set(HTTP_CODE.OK).json(updatedBrand);
   } catch (err) {
