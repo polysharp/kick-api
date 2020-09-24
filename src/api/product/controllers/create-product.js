@@ -14,7 +14,7 @@ const createProduct = async (req, res) => {
 
     const productFromDb = await Product.find({ name: req.body.name });
 
-    if (productFromDb)
+    if (productFromDb.length > 0)
       return res.status(HTTP_CODE.CONFLICT).json({
         status: HTTP_CODE.CONFLICT,
         msg: `Product with name (${req.body.name}) already exists.`
@@ -23,7 +23,7 @@ const createProduct = async (req, res) => {
     const product = new Product({
       name: req.body.name,
       description: req.body.description,
-      brand: req.body.body,
+      brand: req.body.brand,
       serie: req.body.serie,
       category: req.body.category,
       rate: {
@@ -32,9 +32,10 @@ const createProduct = async (req, res) => {
       }
     });
 
-    product.save();
-
-    return res.status(HTTP_CODE.OK).json(product);
+    return product.save(err => {
+      if (err) return res.sendStatus(HTTP_CODE.INTERNAL_SERVER_ERROR);
+      return res.status(HTTP_CODE.OK).json(product);
+    });
   } catch (err) {
     console.log(err);
     return res.sendStatus(HTTP_CODE.INTERNAL_SERVER_ERROR);
