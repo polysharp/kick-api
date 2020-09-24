@@ -14,7 +14,7 @@ const createBrand = async (req, res) => {
 
     const brandFromDb = await Brand.find({ name: req.body.name });
 
-    if (brandFromDb)
+    if (brandFromDb.length > 0)
       return res.status(HTTP_CODE.CONFLICT).json({
         status: HTTP_CODE.CONFLICT,
         msg: `Brand with name (${req.body.name}) already exists.`
