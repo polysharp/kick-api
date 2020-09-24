@@ -14,7 +14,11 @@ const serieJoiSchema = joi.object({
     .required()
 });
 
-const serieSchema = new mongoose.Schema(joigoose.convert(serieJoiSchema), {
+const joigooseSchema = joigoose.convert(serieJoiSchema);
+
+joigooseSchema.name.unique = true;
+
+const serieSchema = new mongoose.Schema(joigooseSchema, {
   timestamps: true
 });
 const Serie = mongoose.model('Serie', serieSchema);
