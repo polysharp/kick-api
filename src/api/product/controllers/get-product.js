@@ -1,7 +1,6 @@
 const HTTP_CODE = require('http-status-codes');
 
 const { Product } = require('../models');
-const { Serie } = require('../../serie/models');
 
 const getProduct = async (req, res) => {
   try {
@@ -13,9 +12,7 @@ const getProduct = async (req, res) => {
         msg: 'Product not found'
       });
 
-    const series = await Serie.find({ productId: req.params.id });
-
-    return res.status(HTTP_CODE.OK).json({ product, series });
+    return res.status(HTTP_CODE.OK).json(product);
   } catch (err) {
     res.sendStatus(HTTP_CODE.INTERNAL_SERVER_ERROR);
     return err;
