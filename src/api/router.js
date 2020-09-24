@@ -4,6 +4,7 @@ const variant = require('./variant');
 const serie = require('./serie');
 const brand = require('./brand');
 const product = require('./product');
+const category = require('./category');
 
 /* Variant */
 router.route('/variants').get(variant.getVariants);
@@ -40,5 +41,14 @@ router
   .get(product.getProduct)
   .put(product.updateProduct)
   .delete(product.deleteProduct);
+
+/* Category */
+router.route('/categories').get(category.getCategories);
+router.route('/category').post(category.createCategory);
+router
+  .route('/category/:id')
+  .get(category.getCategory)
+  .put(category.updateCategory)
+  .delete(category.deleteCategory);
 
 module.exports = router;
