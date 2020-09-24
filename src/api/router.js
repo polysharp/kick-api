@@ -3,6 +3,7 @@ const router = require('express').Router({ caseSensitive: true, strict: true });
 const variant = require('./variant');
 const serie = require('./serie');
 const brand = require('./brand');
+const product = require('./product');
 
 /* Variant */
 router.route('/variants').get(variant.getVariants);
@@ -30,5 +31,14 @@ router
   .get(brand.getBrand)
   .put(brand.updateBrand)
   .delete(brand.deleteBrand);
+
+/* Product */
+router.route('/products').get(product.getProducts);
+router.route('/product').post(product.createProduct);
+router
+  .route('/product/:id')
+  .get(product.getProduct)
+  .put(product.updateProduct)
+  .delete(product.deleteProduct);
 
 module.exports = router;
