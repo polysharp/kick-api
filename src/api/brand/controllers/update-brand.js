@@ -16,8 +16,7 @@ const updateBrand = async (req, res) => {
     if (!brandExists) return res.sendStatus(HTTP_CODE.NOT_FOUND);
 
     await Brand.findByIdAndUpdate(req.params.id, {
-      name: req.body.name,
-      release: req.body.release
+      name: req.body.name
     });
 
     const updatedBrand = await Brand.findById(req.params.id);

@@ -21,8 +21,7 @@ const createBrand = async (req, res) => {
       });
 
     const brand = new Brand({
-      name: req.body.name,
-      series: req.body.series
+      name: req.body.name
     });
 
     brand.save();
