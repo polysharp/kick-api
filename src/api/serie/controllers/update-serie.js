@@ -30,3 +30,5 @@ const updateSerie = async (req, res) => {
 };
 
 module.exports = updateSerie;
+
+// TODO : verifier brand id est vraiment brand id et pas un id perdu dans la nature
