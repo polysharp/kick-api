@@ -1,6 +1,6 @@
 module.exports = {
   env: {
-    es6: true
+    es6: true,
   },
   extends: ['airbnb', 'prettier'],
   plugins: ['prettier'],
@@ -9,6 +9,6 @@ module.exports = {
     'import/no-extraneous-dependencies': 0,
     'no-underscore-dangle': ['error', { allow: ['_', '_id'] }],
     'no-console': 0,
-    'global-require': 0
-  }
+    'global-require': 0,
+  },
 };

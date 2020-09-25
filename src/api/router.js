@@ -18,20 +18,12 @@ router
 /* Serie */
 router.route('/series').get(serie.getSeries);
 router.route('/serie').post(serie.createSerie);
-router
-  .route('/serie/:id')
-  .get(serie.getSerie)
-  .put(serie.updateSerie)
-  .delete(serie.deleteSerie);
+router.route('/serie/:id').get(serie.getSerie).put(serie.updateSerie).delete(serie.deleteSerie);
 
 /* Brand */
 router.route('/brands').get(brand.getBrands);
 router.route('/brand').post(brand.createBrand);
-router
-  .route('/brand/:id')
-  .get(brand.getBrand)
-  .put(brand.updateBrand)
-  .delete(brand.deleteBrand);
+router.route('/brand/:id').get(brand.getBrand).put(brand.updateBrand).delete(brand.deleteBrand);
 
 /* Product */
 router.route('/products').get(product.getProducts);

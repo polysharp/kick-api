@@ -8,7 +8,7 @@ db.connect();
 
 http
   .createServer(app)
-  .on('error', err => {
+  .on('error', (err) => {
     console.error({ err }, 'The HTTP server threw an error. Exiting.');
     process.exit(1);
   })

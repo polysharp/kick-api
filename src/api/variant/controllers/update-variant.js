@@ -8,8 +8,8 @@ const updateVariant = async (req, res) => {
     if (error)
       return res.set(HTTP_CODE.BAD_REQUEST).json({
         status: HTTP_CODE.BAD_REQUEST,
-        msg: error.details.map(detail => detail.message),
-        error
+        msg: error.details.map((detail) => detail.message),
+        error,
       });
 
     const variantExists = await Variant.findById(req.params.id);
@@ -20,7 +20,7 @@ const updateVariant = async (req, res) => {
       ref: req.body.ref,
       color: req.body.color,
       price: req.body.price,
-      quantity: req.body.quantity
+      quantity: req.body.quantity,
     });
 
     const updatedVariant = await Variant.findById(req.params.id);

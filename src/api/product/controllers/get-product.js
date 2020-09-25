@@ -12,21 +12,21 @@ const getProduct = async (req, res) => {
     if (!product)
       return res.status(HTTP_CODE.NOT_FOUND).json({
         status: HTTP_CODE.NOT_FOUND,
-        msg: 'Product not found'
+        msg: 'Product not found',
       });
 
     const variants = await Variant.find({ productId: req.params.id });
     if (variants.length < 1)
       return res.status(HTTP_CODE.NOT_FOUND).json({
         status: HTTP_CODE.NOT_FOUND,
-        msg: `Product with id (${req.params.id}) has no variants`
+        msg: `Product with id (${req.params.id}) has no variants`,
       });
 
-    const availableVariants = variants.filter(variant => variant.quantity > 0);
+    const availableVariants = variants.filter((variant) => variant.quantity > 0);
     if (availableVariants.length < 1)
       return res.status(HTTP_CODE.NOT_FOUND).json({
         status: HTTP_CODE.NOT_FOUND,
-        msg: `Product with id (${req.params.id}) isn't in stock`
+        msg: `Product with id (${req.params.id}) isn't in stock`,
       });
 
     const category = await Category.findById(product.category);
@@ -40,24 +40,24 @@ const getProduct = async (req, res) => {
       description: product.description,
       brand: {
         id: brand.id,
-        name: brand.name
+        name: brand.name,
       },
       serie: {
         id: serie.id,
         name: serie.name,
-        release: serie.release
+        release: serie.release,
       },
       category: {
         id: category.id,
-        name: category.name
+        name: category.name,
       },
-      variants: availableVariants.map(variant => ({
+      variants: availableVariants.map((variant) => ({
         id: variant.id,
         ref: variant.ref,
         color: variant.color,
         price: variant.price,
-        brand: variant.quantity
-      }))
+        brand: variant.quantity,
+      })),
     };
 
     return res.status(HTTP_CODE.OK).json(formattedProduct);

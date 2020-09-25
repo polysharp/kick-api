@@ -10,7 +10,7 @@ const getBrand = async (req, res) => {
     if (!brand)
       return res.status(HTTP_CODE.NOT_FOUND).json({
         status: HTTP_CODE.NOT_FOUND,
-        msg: 'Brand not found'
+        msg: 'Brand not found',
       });
 
     const series = await Serie.find({ brandId: req.params.id });

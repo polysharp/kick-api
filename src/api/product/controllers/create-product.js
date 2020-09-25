@@ -12,8 +12,8 @@ const createProduct = async (req, res) => {
     if (error)
       return res.status(HTTP_CODE.BAD_REQUEST).json({
         status: HTTP_CODE.BAD_REQUEST,
-        msg: error.details.map(detail => detail.message),
-        error
+        msg: error.details.map((detail) => detail.message),
+        error,
       });
 
     error = await refIsValidAndExist(req.body.brand, Brand);
@@ -34,15 +34,15 @@ const createProduct = async (req, res) => {
       category: req.body.category,
       rate: {
         score: req.body.rate.score,
-        amount: req.body.rate.amount
-      }
+        amount: req.body.rate.amount,
+      },
     });
 
-    return product.save(err => {
+    return product.save((err) => {
       if (err)
         return res.status(HTTP_CODE.CONFLICT).json({
           status: HTTP_CODE.CONFLICT,
-          msg: `Product with reference (${req.body.ref}) already exists.`
+          msg: `Product with reference (${req.body.ref}) already exists.`,
         });
       return res.status(HTTP_CODE.OK).json(product);
     });

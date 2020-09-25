@@ -8,8 +8,8 @@ const updateSerie = async (req, res) => {
     if (error)
       return res.set(HTTP_CODE.BAD_REQUEST).json({
         status: HTTP_CODE.BAD_REQUEST,
-        msg: error.details.map(detail => detail.message),
-        error
+        msg: error.details.map((detail) => detail.message),
+        error,
       });
 
     const serieExists = await Serie.findById(req.params.id);
@@ -18,7 +18,7 @@ const updateSerie = async (req, res) => {
     await Serie.findByIdAndUpdate(req.params.id, {
       brandId: req.body.brandId,
       name: req.body.name,
-      release: req.body.release
+      release: req.body.release,
     });
 
     const updatedSerie = await Serie.findById(req.params.id);

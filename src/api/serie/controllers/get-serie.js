@@ -9,7 +9,7 @@ const getSerie = async (req, res) => {
     if (!serie)
       return res.set(HTTP_CODE.NOT_FOUND).json({
         status: HTTP_CODE.NOT_FOUND,
-        msg: 'Serie not found'
+        msg: 'Serie not found',
       });
 
     return res.set(HTTP_CODE.OK).json(serie);

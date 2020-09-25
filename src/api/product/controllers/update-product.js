@@ -8,8 +8,8 @@ const updateProduct = async (req, res) => {
     if (error)
       return res.set(HTTP_CODE.BAD_REQUEST).json({
         status: HTTP_CODE.BAD_REQUEST,
-        msg: error.details.map(detail => detail.message),
-        error
+        msg: error.details.map((detail) => detail.message),
+        error,
       });
 
     const productExists = await Product.findById(req.params.id);
@@ -23,8 +23,8 @@ const updateProduct = async (req, res) => {
       category: req.body.category,
       rate: {
         score: req.body.rate.score,
-        amount: req.body.rate.amount
-      }
+        amount: req.body.rate.amount,
+      },
     });
 
     const updatedProduct = await Product.findById(req.params.id);

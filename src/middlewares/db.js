@@ -11,9 +11,9 @@ const db = {
           useNewUrlParser: true,
           useCreateIndex: true,
           useFindAndModify: false,
-          dbName: DB_NAME
+          dbName: DB_NAME,
         },
-        error => {
+        (error) => {
           if (error) {
             console.error(error);
             return error;
@@ -26,7 +26,7 @@ const db = {
       console.error(error);
       return error;
     }
-  }
+  },
 };
 
 module.exports = db;

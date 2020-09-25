@@ -8,8 +8,8 @@ const createBrand = async (req, res) => {
     if (error)
       return res.status(HTTP_CODE.BAD_REQUEST).json({
         status: HTTP_CODE.BAD_REQUEST,
-        msg: error.details.map(detail => detail.message),
-        error
+        msg: error.details.map((detail) => detail.message),
+        error,
       });
 
     const brandFromDb = await Brand.find({ name: req.body.name });
@@ -17,11 +17,11 @@ const createBrand = async (req, res) => {
     if (brandFromDb.length > 0)
       return res.status(HTTP_CODE.CONFLICT).json({
         status: HTTP_CODE.CONFLICT,
-        msg: `Brand with name (${req.body.name}) already exists.`
+        msg: `Brand with name (${req.body.name}) already exists.`,
       });
 
     const brand = new Brand({
-      name: req.body.name
+      name: req.body.name,
     });
 
     brand.save();

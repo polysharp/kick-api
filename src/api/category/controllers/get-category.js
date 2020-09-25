@@ -9,7 +9,7 @@ const getCategory = async (req, res) => {
     if (!category)
       return res.status(HTTP_CODE.NOT_FOUND).json({
         status: HTTP_CODE.NOT_FOUND,
-        msg: 'Category not found'
+        msg: 'Category not found',
       });
 
     return res.status(HTTP_CODE.OK).json(category);

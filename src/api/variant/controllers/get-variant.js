@@ -8,7 +8,7 @@ const getVariant = async (req, res) => {
     if (!variant)
       return res.set(HTTP_CODE.NOT_FOUND).json({
         status: HTTP_CODE.NOT_FOUND,
-        msg: 'Variant not found'
+        msg: 'Variant not found',
       });
 
     return res.set(HTTP_CODE.OK).json(variant);
