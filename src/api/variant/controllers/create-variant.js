@@ -42,3 +42,5 @@ const createVariant = async (req, res) => {
 };
 
 module.exports = createVariant;
+
+// TODO : delete indexes for ref and do validation manually (impossible to create two variants with the same color)
