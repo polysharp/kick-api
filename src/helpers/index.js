@@ -1,6 +1,3 @@
-const db = require('./db');
-const localization = require('./localization');
-
 module.exports = {
-  db,
+  refIsValidAndExist: require('./ref-is-valid-and-exist'),
 };

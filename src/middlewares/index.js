@@ -1,5 +1,4 @@
-const authGuard = require('./auth-guard');
-
 module.exports = {
-  authGuard
+  authGuard: require('./auth-guard'),
+  db: require('./db'),
 };

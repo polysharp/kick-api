@@ -2,13 +2,10 @@ const express = require('express');
 const HTTP_CODE = require('http-status-codes');
 const cors = require('cors');
 
-const router = require('./router');
+const router = require('./api/router');
 const { API_VERSION } = require('./constants');
-const { db } = require('./helpers');
 
 const app = express();
-
-db.connect();
 
 app.use(cors());
 app.use(express.json());

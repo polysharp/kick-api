@@ -10,9 +10,10 @@ const db = {
           useUnifiedTopology: true,
           useNewUrlParser: true,
           useCreateIndex: true,
-          dbName: DB_NAME
+          useFindAndModify: false,
+          dbName: DB_NAME,
         },
-        error => {
+        (error) => {
           if (error) {
             console.error(error);
             return error;
@@ -25,7 +26,7 @@ const db = {
       console.error(error);
       return error;
     }
-  }
+  },
 };
 
 module.exports = db;

@@ -1,3 +1,3 @@
-# kick-api
+# my-shell-api
 
-Kick API | NodeJS / Stripe
+My Shell API | REST | NodeJS
